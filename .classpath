@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" output="build" path="src"/>
+	<classpathentry kind="var" path="JRE_LIB" sourcepath="JRE_SRC"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/commons-io-2.0.1.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/dom4j/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/dom4j/lib/endorsed/xml-apis-2.0.2.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/dom4j/lib/jaxen-1.1-beta-6.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/dom4j/lib/jaxme-api-0.3.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/dom4j/lib/jsr173_1.0_api.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/dom4j/lib/msv-20030807.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/dom4j/lib/pull-parser-2.1.10.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/dom4j/lib/relaxngDatatype-20030807.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/dom4j/lib/test/jsr173_1.0_ri.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/dom4j/lib/test/junit-3.8.1.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/dom4j/lib/test/junitperf-1.8.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/dom4j/lib/tools/isorelax-20030108.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/dom4j/lib/tools/jaxme-0.3.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/dom4j/lib/tools/jaxme-js-0.3.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/dom4j/lib/tools/jaxme-xs-0.3.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/dom4j/lib/tools/jtidy-4aug2000r7-dev.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/dom4j/lib/tools/xalan-2.5.1.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/dom4j/lib/tools/xercesImpl-2.6.2.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/dom4j/lib/xpp3-1.1.3.3.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/dom4j/lib/xsdlib-20030807.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/httpcomponents-client-4.1.1/lib/commons-codec-1.4.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/httpcomponents-client-4.1.1/lib/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/httpcomponents-client-4.1.1/lib/httpclient-4.1.1.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/httpcomponents-client-4.1.1/lib/httpclient-cache-4.1.1.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/httpcomponents-client-4.1.1/lib/httpcore-4.1.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/httpcomponents-client-4.1.1/lib/httpmime-4.1.1.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/jsoup-1.5.2.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/scribe-1.1.3.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="/Users/ktang/Documents/workspace/Camus/lib/gson-1.7.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

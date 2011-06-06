@@ -1,0 +1,54 @@
+<project name="camus" default="run" basedir=".">
+    <description>
+        script to parse twitter and facebook feeds and extract linked stories
+    </description>
+	
+  <!-- set global properties for this build -->
+  <property name="src" location="src"/>
+  <property name="build" location="build"/>
+  <property name="dist"  location="dist"/>
+  <property name="lib.dir"     value="lib"/>
+  <property name="config.dir"  value="conf"/>
+  <property name="main-class"  value="com.camus.main.TestClient"/>
+	
+  <path id="classpath">
+  	<fileset dir="${lib.dir}" includes="**/*.jar"/>
+  </path>
+
+  <target name="compile" description="compile the source " >
+  	<mkdir dir="${build}"/>  	
+    <javac srcdir="${src}" destdir="${build}"  classpathref="classpath" />
+        <copy todir="${build}">
+            <fileset dir="${src}" excludes="**/*.java"/>
+            <fileset dir="${config.dir}" excludes="**/*.java"/>
+        </copy>  	
+  </target>
+
+  <target name="dist" depends="compile"
+        description="generate the distribution" >
+    <mkdir dir="${dist}"/>
+  	
+    <jar destfile="${dist}/camus.jar" basedir="${build}">
+            <manifest>
+                <attribute name="Main-Class" value="${main-class}"/>
+            </manifest>
+    </jar>
+  </target>
+
+  <target name="run" depends="dist">
+	 <java classname="${main-class}" fork="true">   
+	 	<classpath>
+	 		<path refid="classpath"/>
+	 		<path id="application" location="${dist}/camus.jar"/>
+	 	</classpath>
+	 </java>
+  </target>
+	
+  <target name="clean-build" depends="clean,compile"/>
+
+  <target name="clean"
+        description="clean up" >
+    <delete dir="${build}"/>
+    <delete dir="${dist}"/>
+  </target>
+</project>
