@@ -1,0 +1,25 @@
+# crawler settings
+twitter.crawler.follow-links=true
+twitter.crawler.download-followed-links-images=false
+facebook.crawler.follow-links=true
+facebook.crawler.download-followed-links-images=false
+
+
+# directories to save images to
+twitter.crawler.download-images-dir=/tmp/camus/
+facebook.crawler.download-images-dir=/tmp/camus/
+
+
+#twitter settings
+twitter.api.key=
+twitter.api.secret=
+
+twitter.user.token=
+twitter.user.secret=
+
+
+#facebook settings
+facebook.api.key=
+facebook.api.secret=
+
+facebook.user.token=
