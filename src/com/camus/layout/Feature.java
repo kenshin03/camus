@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2011 Red Soldier Limited. All rights reserved.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
 package com.camus.layout;
 
 public class Feature {
@@ -5,13 +20,18 @@ public class Feature {
     private String date;
     private String title;
     private String imageURL;
-    private boolean imageOnTop;
-    private boolean imageOnLeft;
     private String source;
     private String authorName;
     private String authorImageURL;
+    private boolean isLandscape;
     
-    public String getAuthorName() {
+    public boolean isLandscape() {
+    	return isLandscape;
+    }
+	public void setLandscape(boolean isLandscape) {
+    	this.isLandscape = isLandscape;
+    }
+	public String getAuthorName() {
         return authorName;
     }
     public void setAuthorName(String authorName) {
@@ -53,18 +73,6 @@ public class Feature {
     }
     public void setImageURL(String imageURL) {
         this.imageURL = imageURL;
-    }
-    public boolean isImageOnTop() {
-        return imageOnTop;
-    }
-    public void setImageOnTop(boolean imageOnTop) {
-        this.imageOnTop = imageOnTop;
-    }
-    public boolean isImageOnLeft() {
-        return imageOnLeft;
-    }
-    public void setImageOnLeft(boolean imageOnLeft) {
-        this.imageOnLeft = imageOnLeft;
     }
 
 }

@@ -1,3 +1,5 @@
+.DS_Store
+
 # Eclipse specific settings
 
 .classpath
@@ -7,4 +9,5 @@
 # Binaries
 
 target
-conf/camus.properties
+.properties
+.backup

@@ -1,3 +1,18 @@
+/*
+ Copyright (C) 2011 Red Soldier Limited. All rights reserved.
+ 
+ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
+ FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
 package com.camus.layout;
 
 import java.util.ArrayList;
@@ -63,7 +78,7 @@ public class StoryLayoutAnalyzer {
 								.setImageURL(linkedStory.getStoryImageURL());
 						if (linkedStory.getStoryImageWidth() > linkedStory
 								.getStoryImageHeight()) {
-							featureStory.setImageOnTop(true);
+							featureStory.setLandscape(true);
 						}
 					}
 					featuredStoriesList.add(featureStory);
@@ -90,7 +105,7 @@ public class StoryLayoutAnalyzer {
 						filler.setImageURL(linkedStory.getStoryImageURL());
 						if (linkedStory.getStoryImageWidth() > linkedStory
 								.getStoryImageHeight()) {
-							filler.setImageOnTop(true);
+							filler.setLandscape(true);
 						}
 					}
 					fillerStoriesList.add(filler);
@@ -100,6 +115,8 @@ public class StoryLayoutAnalyzer {
 		section.setShortMessages(shortMessagesList);
 		section.setFeaturedStories(featuredStoriesList);
 		section.setFillerStories(fillerStoriesList);
+		
+		/*
 
 		// assemble templates
 		String[] twitterPagesLayout = LayoutTemplates
@@ -112,6 +129,7 @@ public class StoryLayoutAnalyzer {
 			}
 		}
 		section.setLayoutTemplate(layoutString);
+		*/
 
 		return section;
 	}
