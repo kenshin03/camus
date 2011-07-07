@@ -19,3 +19,5 @@ Third party libraries:
       * scribe-1.1.3.jar
    * Dom4J - xml parsing
       * dom4j
+   * mongodb java driver - for storing documents and tweets
+      * mongo-2.6.3.jar
