@@ -1,72 +1,103 @@
-/*
- Copyright (C) 2011 Red Soldier Limited. All rights reserved.
- 
- THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
- FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
 package com.camus.util.readability;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class WordStats {
     
-    private int paragraphsCount = 0;
-
-	public int getParagraphsCount() {
-        return paragraphsCount;
+    private int paragraphCount = 0;
+    private int stopWordCount = 0;
+    private int wordCount = 0;
+    private int sentenceCount = 0;
+    private int syllableCount = 0;
+    private int letterNumberCount = 0;
+    private int complexCount = 0;
+    private int fresScore = 0;
+    private int ariScore = 0;
+    private int fkglScore = 0;
+    private int clScore = 0;
+    private int gunningFogScore = 0;
+    private int smogScore = 0; 
+    
+    
+    
+    public int getFresScore() {
+        return fresScore;
+    }
+    public void setFresScore(int fresScore) {
+        this.fresScore = fresScore;
+    }
+    public int getAriScore() {
+        return ariScore;
+    }
+    public void setAriScore(int ariScore) {
+        this.ariScore = ariScore;
+    }
+    public int getFkglScore() {
+        return fkglScore;
+    }
+    public void setFkglScore(int fkglScore) {
+        this.fkglScore = fkglScore;
+    }
+    public int getClScore() {
+        return clScore;
+    }
+    public void setClScore(int clScore) {
+        this.clScore = clScore;
+    }
+    public int getGunningFogScore() {
+        return gunningFogScore;
+    }
+    public void setGunningFogScore(int gunningFogScore) {
+        this.gunningFogScore = gunningFogScore;
+    }
+    public int getSmogScore() {
+        return smogScore;
+    }
+    public void setSmogScore(int smogScore) {
+        this.smogScore = smogScore;
+    }
+    public int getParagraphCount() {
+        return paragraphCount;
+    }
+    public void setParagraphCount(int paragraphCount) {
+        this.paragraphCount = paragraphCount;
+    }
+    public int getStopWordCount() {
+        return stopWordCount;
+    }
+    public void setStopWordCount(int stopWordCount) {
+        this.stopWordCount = stopWordCount;
+    }
+    public int getWordCount() {
+        return wordCount;
+    }
+    public void setWordCount(int wordCount) {
+        this.wordCount = wordCount;
+    }
+    public int getSentenceCount() {
+        return sentenceCount;
+    }
+    public void setSentenceCount(int sentenceCount) {
+        this.sentenceCount = sentenceCount;
+    }
+    public int getSyllableCount() {
+        return syllableCount;
+    }
+    public void setSyllableCount(int syllableCount) {
+        this.syllableCount = syllableCount;
+    }
+    public int getLetterNumberCount() {
+        return letterNumberCount;
+    }
+    public void setLetterNumberCount(int letterNumberCount) {
+        this.letterNumberCount = letterNumberCount;
+    }
+    public int getComplexCount() {
+        return complexCount;
+    }
+    public void setComplexCount(int complexCount) {
+        this.complexCount = complexCount;
     }
 
-    public void setParagraphsCount(int paragraphsCount) {
-        this.paragraphsCount = paragraphsCount;
-    }
-
-	/**
-	 * total number of stopwords or good words that we can calculate
-	 */
-	private int stopWordCount = 0;
-
-	/**
-	 * total number of words on a node
-	 */
-	private int wordCount = 0;
-
-	/**
-	 * holds an actual list of the stop words we found
-	 */
-	private List<String> stopWords = new ArrayList<String>();
-
-	public List<String> getStopWords() {
-		return stopWords;
-	}
-
-	public void setStopWords(List<String> stopWords) {
-		this.stopWords = stopWords;
-	}
-
-	public int getStopWordCount() {
-		return stopWordCount;
-	}
-
-	public void setStopWordCount(int stopWordCount) {
-		this.stopWordCount = stopWordCount;
-	}
-
-	public int getWordCount() {
-		return wordCount;
-	}
-
-	public void setWordCount(int wordCount) {
-		this.wordCount = wordCount;
-	}
 
 }

@@ -1,18 +1,3 @@
-/*
- Copyright (C) 2011 Red Soldier Limited. All rights reserved.
- 
- THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE
- FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
 package com.camus.feeders;
 
 import java.io.File;
@@ -37,10 +22,8 @@ import org.dom4j.DocumentException;
 import org.dom4j.io.SAXReader;
 
 import com.camus.common.LinkedStory;
-import com.camus.util.readability.CamusTextUtil;
 import com.camus.util.readability.ContentExtractor;
 import com.camus.util.readability.ImageExtractor;
-import com.camus.util.readability.SimpleImageInfo;
 import com.camus.util.readability.WordStats;
 
 public abstract class FeederTask {
@@ -80,7 +63,7 @@ public abstract class FeederTask {
 		}
 		return inputURL;
 	}
-
+/*
 	public static LinkedStory parseCrawledLinkedStory(String responseBody,
 			LinkedStory linkedStory) {
 
@@ -251,18 +234,18 @@ public abstract class FeederTask {
 								.downloadImageToTempFile(storyURL, linkedStory
 										.getStoryImageURL());
 
-						/*
-						 * SimpleImageInfo simpleImageInfo = new
-						 * SimpleImageInfo( new File(tempFileName)); linkedStory
-						 * .setStoryImageHeight(simpleImageInfo.getHeight());
-						 * linkedStory
-						 * .setStoryImageWidth(simpleImageInfo.getWidth());
-						 * 
-						 * if (linkedStory.getStoryImageWidth() > linkedStory
-						 * .getStoryImageHeight()) {
-						 * linkedStory.setStoryImageIsLandscape(true); } else {
-						 * linkedStory.setStoryImageIsLandscape(false); }
-						 */
+						
+						  SimpleImageInfo simpleImageInfo = new
+						  SimpleImageInfo( new File(tempFileName)); linkedStory
+						  .setStoryImageHeight(simpleImageInfo.getHeight());
+						 linkedStory
+						  .setStoryImageWidth(simpleImageInfo.getWidth());
+						  
+						 if (linkedStory.getStoryImageWidth() > linkedStory
+						  .getStoryImageHeight()) {
+						  linkedStory.setStoryImageIsLandscape(true); } else {
+						  linkedStory.setStoryImageIsLandscape(false); }
+						 
 						linkedStory.setStoryImageURL(tempFileName);
 						logger
 								.info("parseCrawledLinkedStory setting tempFileName to setStoryImageURL: "
@@ -285,9 +268,10 @@ public abstract class FeederTask {
 
 	
 	public static LinkedStory crawlLinkedStory(String storyURL) {
-		return FeederTask.crawlLinkedStory(storyURL, null);
+		return FeedTask.crawlLinkedStory(storyURL, null);
 	}
-	
+*/
+/*
 	public static LinkedStory crawlLinkedStory(String storyURL, LinkedStory inputLinkedStory) {
 		LinkedStory linkedStory = null;
 		if (inputLinkedStory != null){
@@ -338,52 +322,7 @@ public abstract class FeederTask {
 		return null;
 	}
 
-	public static String extractURLInFeed(String feedStory) {
-		String foundURL = null;
-		try {
-			Pattern pattern = Pattern
-					.compile("((mailto\\:|(news|(ht|f)tp(s?))\\://){1}\\S+)");
-			Matcher matcher = pattern.matcher(feedStory);
+*/
 
-			while (matcher.find()) {
-				foundURL = matcher.group();
-				break;
-			}
-
-		} catch (Exception e) {
-			logger.error("Error in extractURLInFeed: " + e);
-		}
-		return foundURL;
-	}
-
-	/**
-	 * based on a delimiter in the title take the longest piece or do some
-	 * custom logic based on the site
-	 * 
-	 * @param title
-	 * @param delimeter
-	 * @return
-	 */
-	public static String doTitleSplits(String title, String delimeter) {
-
-		String largeText = "";
-		int largetTextLen = 0;
-
-		String[] titlePieces = title.split(delimeter);
-
-		// take the largest split
-		for (String p : titlePieces) {
-			if (p.length() > largetTextLen) {
-				largeText = p;
-				largetTextLen = p.length();
-			}
-		}
-
-		largeText = largeText.replace("&raquo;", "");
-		largeText = largeText.replace("»", "");
-
-		return largeText.trim();
-
-	}
 
 }

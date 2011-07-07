@@ -3,6 +3,14 @@ Background
 
 *Camus* is the server component for a flipboard like social reader I'm working on, called *Cassius*.
 
+More details on http://www.corgitoergosum.net/cassius-project-flipboard-clone/
+
+New in revision:
+  * tweets and extracted articles now need to be stored in a running local instance of mongodb. Once I move and test these scripts on AWS, I'll make the settings configuable
+
+
+
+
 Third party libraries:
 
    * Apache Commons - for network 
@@ -21,3 +29,5 @@ Third party libraries:
       * dom4j
    * mongodb java driver - for storing documents and tweets
       * mongo-2.6.3.jar
+   * lingpipe - required by ipeirotis related classes for analyzing readability of english text
+      * lingpipe-4.1.0.jar
