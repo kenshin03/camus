@@ -1,21 +1,8 @@
 package com.camus.main;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-
 import org.apache.log4j.Logger;
 import org.apache.log4j.BasicConfigurator;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Document;
-import org.dom4j.Element;
-
-import com.camus.common.FeedStory;
 import com.camus.feeders.TwitterTimelineFeedTask;
-import com.camus.layout.LayoutTemplates;
-import com.camus.layout.Section;
-import com.camus.layout.StoryLayoutAnalyzer;
-import com.google.gson.Gson;
 
 public class TestClient {
 
@@ -29,7 +16,7 @@ public class TestClient {
 			  twitterFeedTask.retrieveTweets();
 			  twitterFeedTask.processTweets();
 
-			  
+// deal with output and formatting again later			  
 //			  StoryLayoutAnalyzer layoutAnalyzer = new StoryLayoutAnalyzer();
 //			  Section section = layoutAnalyzer.analyzeStories(tweetsList);
 /*
