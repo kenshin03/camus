@@ -3,25 +3,18 @@ package com.camus.feeders;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.concurrent.Callable;
-import java.util.concurrent.CompletionService;
-import java.util.concurrent.ExecutorCompletionService;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
@@ -36,12 +29,10 @@ import org.scribe.model.Token;
 import org.scribe.model.Verb;
 import org.scribe.oauth.OAuthService;
 
-import com.camus.common.FeedStory;
 import com.camus.common.LinkedSiteMeta;
-import com.camus.common.LinkedStory;
-import com.camus.common.Tweet;
 import com.camus.util.readability.ContentExtractor;
-import com.camus.util.readability.WordStats;
+
+import org.im4java.core.IdentifyCmd;
 
 import com.ipeirotis.readability.BagOfReadabilityObjects;
 import com.ipeirotis.readability.Readability;
@@ -51,6 +42,9 @@ import com.mongodb.DBCollection;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.mongodb.DBCursor;
+
+import org.im4java.core.*;
+import org.im4java.process.*;
 
 public class TwitterTimelineFeedTask extends FeederTask {
     
@@ -188,7 +182,7 @@ class TweetProcessingTask implements Runnable {
 
 		HttpGet httpget = new HttpGet(urlInFeed);
 		HttpResponse response = httpclient.execute(httpget);
-		String[] acceptedHeaders = {"text/html", "text/html;charset=utf-8", "application/xhtml+xml;charset=utf-8"};
+		String[] acceptedHeaders = {"text/html", "text/html;charset=utf-8", "application/xhtml+xml;charset=utf-8", "text/html;charset=ISO-8859-1"};
 
 		if (response.containsHeader("Content-type")) {
 		    Header[] headers = response.getHeaders("Content-type");
@@ -223,6 +217,39 @@ class TweetProcessingTask implements Runnable {
         		    
         		    List<String> statusList = new ArrayList<String>();
         		    statusList.add(TwitterTimelineFeedTask.LINKED_SITE_CRAWLED);
+        		    
+        		    IMOperation op = new IMOperation();
+        		    op.addImage(linkedSiteMeta.getMetaImageURL());
+        		    IdentifyCmd identify = new IdentifyCmd();
+        		    ArrayListOutputConsumer output = new ArrayListOutputConsumer();
+        		    identify.setOutputConsumer(output);
+        		    identify.run(op);
+        		    double imageBoost = 0;
+        		    ArrayList<String> cmdOutput = output.getOutput();
+        		    if (cmdOutput.size() > 0){
+        			String[] identifyResults = cmdOutput.get(0).split(" ");
+        			String[] dimensions = identifyResults[2].split("x");
+        			int width = Integer.parseInt(dimensions[0]);
+        			int height = Integer.parseInt(dimensions[1]);
+        			boolean isLandscape = false;
+        			if (width > height){
+        			    // is landscape
+        			    isLandscape = true;
+        			}else{
+        			    isLandscape = false;
+        			}
+        			dbObj.put("landscape", isLandscape);
+        			
+        			// use some arbitrary size to determine image is "good", need to take pixel into accounts 
+        			if ((width>600) || (height > 500)){
+        			    imageBoost = 1;
+                		    dbObj.put("image_quality", 1);
+        			}
+        			
+        		    }
+        		    
+        		    
+        		    
         		    double readabilityMean = 0.0;
         		    if (readabilityText != null){
         			BasicDBObject readabilityScoresObj =  new BasicDBObject();
@@ -264,7 +291,7 @@ class TweetProcessingTask implements Runnable {
         		    
         		    dbObj.put("social", meanSocial);
         		    
-        		    double boostScore = meanSocial*0.6 + readabilityMean*0.4;
+        		    double boostScore = meanSocial*0.4 + readabilityMean*0.3 + imageBoost*0.3;
         		    
         		    dbObj.put("boost", boostScore);        			
         		    
