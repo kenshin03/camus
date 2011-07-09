@@ -32,8 +32,6 @@ import org.scribe.oauth.OAuthService;
 import com.camus.common.LinkedSiteMeta;
 import com.camus.util.readability.ContentExtractor;
 
-import org.im4java.core.IdentifyCmd;
-
 import com.ipeirotis.readability.BagOfReadabilityObjects;
 import com.ipeirotis.readability.Readability;
 import com.mongodb.Mongo;
@@ -44,7 +42,6 @@ import com.mongodb.DBObject;
 import com.mongodb.DBCursor;
 
 import org.im4java.core.*;
-import org.im4java.process.*;
 
 public class TwitterTimelineFeedTask extends FeederTask {
     
@@ -182,7 +179,7 @@ class TweetProcessingTask implements Runnable {
 
 		HttpGet httpget = new HttpGet(urlInFeed);
 		HttpResponse response = httpclient.execute(httpget);
-		String[] acceptedHeaders = {"text/html", "text/html;charset=utf-8", "application/xhtml+xml;charset=utf-8", "text/html;charset=ISO-8859-1"};
+		String[] acceptedHeaders = {"text/html", "text/html;charset=utf-8", "application/xhtml+xml;charset=utf-8", "text/html;charset=iso-8859-1"};
 
 		if (response.containsHeader("Content-type")) {
 		    Header[] headers = response.getHeaders("Content-type");
@@ -218,19 +215,18 @@ class TweetProcessingTask implements Runnable {
         		    List<String> statusList = new ArrayList<String>();
         		    statusList.add(TwitterTimelineFeedTask.LINKED_SITE_CRAWLED);
         		    
-        		    IMOperation op = new IMOperation();
-        		    op.addImage(linkedSiteMeta.getMetaImageURL());
-        		    IdentifyCmd identify = new IdentifyCmd();
-        		    ArrayListOutputConsumer output = new ArrayListOutputConsumer();
-        		    identify.setOutputConsumer(output);
-        		    identify.run(op);
         		    double imageBoost = 0;
-        		    ArrayList<String> cmdOutput = output.getOutput();
-        		    if (cmdOutput.size() > 0){
-        			String[] identifyResults = cmdOutput.get(0).split(" ");
-        			String[] dimensions = identifyResults[2].split("x");
-        			int width = Integer.parseInt(dimensions[0]);
-        			int height = Integer.parseInt(dimensions[1]);
+        		    if (linkedSiteMeta.getMetaImageURL() != null){
+        			Info imageInfo = new Info(linkedSiteMeta.getMetaImageURL());
+        			double pixelsNum = 0;
+        			String pixelString = imageInfo.getProperty("Number pixels");
+        			if (pixelString.indexOf("K") > -1){
+        			    pixelsNum = Double.parseDouble(pixelString.substring(0, pixelString.indexOf("K")));
+        			}
+        			String geometryString = imageInfo.getProperty("Geometry");
+        			String[] geometryArray = geometryString.split("\\+");
+        			int width = Integer.parseInt(geometryArray[0].split("x")[0]);
+        			int height = Integer.parseInt(geometryArray[0].split("x")[1]);
         			boolean isLandscape = false;
         			if (width > height){
         			    // is landscape
@@ -239,16 +235,15 @@ class TweetProcessingTask implements Runnable {
         			    isLandscape = false;
         			}
         			dbObj.put("landscape", isLandscape);
-        			
         			// use some arbitrary size to determine image is "good", need to take pixel into accounts 
         			if ((width>600) || (height > 500)){
-        			    imageBoost = 1;
-                		    dbObj.put("image_quality", 1);
+        			    imageBoost += 0.6;
         			}
-        			
+        			// a standard instagram photo is 350k, a typical techcrunch thumbnail is 40k
+        			if (pixelsNum > 100){
+        			    imageBoost += 0.4;
+        			}
         		    }
-        		    
-        		    
         		    
         		    double readabilityMean = 0.0;
         		    if (readabilityText != null){
@@ -290,6 +285,7 @@ class TweetProcessingTask implements Runnable {
         		    double meanSocial = (normalizedTweet+normalizedShares)/2;
         		    
         		    dbObj.put("social", meanSocial);
+        		    dbObj.put("imageBoost", meanSocial);
         		    
         		    double boostScore = meanSocial*0.4 + readabilityMean*0.3 + imageBoost*0.3;
         		    
